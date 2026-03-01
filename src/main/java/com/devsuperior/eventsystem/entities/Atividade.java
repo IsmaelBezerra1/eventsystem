@@ -15,8 +15,12 @@ public class Atividade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private String Descricao;
+    private String descricao;
     private Double preco;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
 
     @ManyToMany(mappedBy = "atividades")
     private Set<Participante> participantes = new HashSet<>();
@@ -31,7 +35,7 @@ public class Atividade {
 
     public Atividade(Long id, String descricao, Double preco, String nome) {
         this.id = id;
-        Descricao = descricao;
+        this.descricao = descricao;
         this.preco = preco;
         this.nome = nome;
     }
@@ -61,10 +65,10 @@ public class Atividade {
     }
 
     public String getDescricao() {
-        return Descricao;
+        return descricao;
     }
 
     public void setDescricao(String descricao) {
-        Descricao = descricao;
+        descricao = descricao;
     }
 }
